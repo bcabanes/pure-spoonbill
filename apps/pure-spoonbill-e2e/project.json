@@ -1,0 +1,33 @@
+{
+  "name": "pure-spoonbill-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/pure-spoonbill-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/pure-spoonbill-e2e/cypress.config.ts",
+        "devServerTarget": "pure-spoonbill:serve:development",
+        "testingType": "e2e"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "pure-spoonbill:serve:production"
+        },
+        "ci": {
+          "devServerTarget": "pure-spoonbill:serve-static"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/pure-spoonbill-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["pure-spoonbill"]
+}

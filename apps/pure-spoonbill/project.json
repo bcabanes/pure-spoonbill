@@ -1,0 +1,78 @@
+{
+  "name": "pure-spoonbill",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/pure-spoonbill/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/pure-spoonbill"
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/vite:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "pure-spoonbill:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "pure-spoonbill:build:development",
+          "hmr": true
+        },
+        "production": {
+          "buildTarget": "pure-spoonbill:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "preview": {
+      "executor": "@nx/vite:preview-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "pure-spoonbill:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "pure-spoonbill:build:development"
+        },
+        "production": {
+          "buildTarget": "pure-spoonbill:build:production"
+        }
+      }
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["{options.reportsDirectory}"],
+      "options": {
+        "passWithNoTests": true,
+        "reportsDirectory": "../../coverage/apps/pure-spoonbill"
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/pure-spoonbill/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "pure-spoonbill:build"
+      }
+    }
+  },
+  "tags": []
+}
